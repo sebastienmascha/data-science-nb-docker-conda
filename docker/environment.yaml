@@ -1,0 +1,13 @@
+name: base                                                                   
+channels:                                                                    
+  - defaults                                                                 
+dependencies:   
+  - nodejs                                                             
+  - jupyterlab
+  - matplotlib
+  - pandas
+  - seaborn
+  - scikit-learn
+  - tensorflow
+  
+  

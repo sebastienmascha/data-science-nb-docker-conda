@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  python:       
+    build: 
+      dockerfile: ./docker/Dockerfile-dev
+      context: ./
+    image: nb_data_science:dev
+
+    env_file:
+      - .env_dev
+
+    ports:
+      - "8888:8888"
+
+    command: 
+      jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token='local_dev'
+
+    volumes:
+      - ./app:/app

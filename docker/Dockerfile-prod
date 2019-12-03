@@ -1,0 +1,12 @@
+# base image
+FROM continuumio/miniconda3:4.7.12
+
+# load in the environment.yml file
+ADD ./docker/environment.yaml /
+
+# create the environment
+RUN conda update -n base conda -y && conda env update --file environment.yaml --prune
+
+# add the app folder to the docker image - this allows us to run
+# the image directly without relying on docker-compose or local file dependenciess
+ADD ./app/ /app
