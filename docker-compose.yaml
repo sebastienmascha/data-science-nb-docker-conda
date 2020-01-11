@@ -2,19 +2,30 @@ version: "3.7"
 
 services:
   python:       
+    container_name: nb_isep_astorb
     build: 
       dockerfile: ./docker/Dockerfile-dev
       context: ./
-    image: nb_data_science:dev
-
+    image: smascha/data-science-nb-docker-conda:dev
     env_file:
       - .env_dev
-
     ports:
-      - "8888:8888"
-
+      - "8889:8888"
     command: 
       jupyter lab --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.token='local_dev'
-
     volumes:
       - ./app:/app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nb_isep_astorb.rule=Host(`isep-astorb.smascha.ai`)"
+      - "traefik.http.routers.nb_isep_astorb.entrypoints=websecure"
+      - "traefik.http.routers.nb_isep_astorb.tls.certresolver=mytlschallenge"
+    networks:
+      - proxy
+    restart: always
+
+networks:
+  proxy:
+    external: true
+
+
