@@ -9,5 +9,6 @@ dependencies:
   - seaborn
   - scikit-learn
   - tensorflow
+  - jupyter-dash
   
   
